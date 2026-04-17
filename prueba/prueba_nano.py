@@ -16,7 +16,9 @@ dt = 0
 height = screen.get_height()
 width = screen.get_width()
 
-player_pos = pygame.Vector2(width/2, height/2)
+#Atributos de la particula 
+player_pos = pygame.Vector2(width/2, height/2) #vector posicion 
+player_vel = pygame.Vector2(100, 100) #vector velocidad 
 
 while running:
     for event in pygame.event.get():
@@ -42,7 +44,12 @@ while running:
         player_pos.x += 300 * dt 
     if keys[pygame.K_q]:
         pygame.quit()
-
+    player_pos.y += player_vel.y*dt
+    player_pos.x += player_vel.x*dt
+    if player_pos.y >= max_height or player_pos.y <= min_height:
+        player_vel.y = -player_vel.y
+    if player_pos.x >= max_width or player_pos.x <= min_width:
+        player_vel.x = -player_vel.x
 
     #Poner el trabajo en la pantalla
     pygame.display.flip()
